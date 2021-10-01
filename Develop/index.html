@@ -23,18 +23,39 @@
   </head>
 
   <body>
+
     <header class="jumbotron">
       <h1 class="display-3">Work Day Scheduler</h1>
       <p class="lead">A simple calendar app for scheduling your work day</p>
       <p id="currentDay" class="lead"></p>
     </header>
-    <div class="container">
-      <!-- Timeblocks go here -->
+
+    <div class="container-fluid w-75 align-center justify-center">
+
       <div class="row timeBlock" id="9">
-        <div class="col-12 col-sm-1" id="timeEl">Hour</div>
-        <button class="col-12 col-sm-10" id="taskEl">Enter text here</button>
-        <button class="col-12 col-sm-1" id="saveEl"></button>
+
+        <div class="col-12 col-lg-1 bg-secondary rounded p3 text-align:center" ><h3 id="timeEl">9</h3></div>
+        <form class="col-12 col-lg-10 h-100" id="taskEl">          
+          <input type="text" class="form-control" id="scheduleText" placeholder="What to do...">
+        </form>
+        <button type="button" class="btn btn-info col-12 col-lg-1 " id="saveEl">Save</button>
+
       </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <div class="row timeBlock" id="10">
         <div class="col-12 col-sm-1" id="timeEl">Hour</div>
         <button class="col-12 col-sm-10" id="taskEl">Enter text here</button>
