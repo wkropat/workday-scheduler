@@ -28,6 +28,8 @@ textarea {
 .time-block {
   text-align: center;
   border-radius: 15px;
+  width:75%;
+  justify-content:center;
 }
 
 .row {
@@ -68,4 +70,13 @@ textarea {
 .saveBtn i:hover {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
+}
+
+.h3 {
+  color:white;
+}
+
+#taskEl {
+  background-color: aquamarine;
+
 }
