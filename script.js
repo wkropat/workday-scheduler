@@ -1,5 +1,6 @@
 var timeBlock = document.querySelector("timeBlock");
 var thisHour = moment().format("H");
+
 var mainEl = document.getElementById("mainEl");
 var tasks = [];
 
@@ -17,14 +18,22 @@ function init() {
 function renderSchedule() {
 
     // Make scheule blocks 
-    for (var i = 9; i < 18; i++) {      
+    for (var i = 9; i < 18; i++) {
+
+        //Compare actual time to hour block
+        var hour = i;
+        // Back to 12 hour clock
+        if (i > 12) { hour = hour - 12; }
+
+
+
         // for each hour in the day make the row structure
         var timeBlock = document.createElement("div");
         timeBlock.setAttribute("class", "container-fluid timeBlock");
         var rowEl = document.createElement("div");
         rowEl.setAttribute("class", "row");
         timeBlock.appendChild(rowEl);
-        
+
         // Fill out hour on the left
         var timeEl = document.createElement("div");
         timeEl.setAttribute("class", "col-12 col-lg-1 bg-secondary rounded p3 text-align:center")
@@ -36,22 +45,30 @@ function renderSchedule() {
         // Create Form Element, background depends on time
 
         var formEl = document.createElement("form");
-        formEl.setAttribute("class", "col-12 col-lg-10");
         formEl.setAttribute("id", "taskEl");
+        // Set class based on relation to current time
+        if (i < thisHour) {
+            formEl.setAttribute("class", "col-12 col-lg-10 past");
+        } else if (i == thisHour) {
+            formEl.setAttribute("class", "col-12 col-lg-10 present");
+
+        } else {
+            formEl.setAttribute("class", "col-12 col-lg-10 future");
+        }
 
         var formInputEl = document.createElement("input");
-        formInputEl.setAttribute("type","text");
-        formInputEl.setAttribute("class","form-control");
-        formInputEl.setAttribute("id","scheduleText");
-        formInputEl.setAttribute("placeholder","What to do...");
+        formInputEl.setAttribute("type", "text");
+        formInputEl.setAttribute("class", "form-control");
+        formInputEl.setAttribute("id", "scheduleText");
+        formInputEl.setAttribute("placeholder", "What to do...");
         formEl.appendChild(formInputEl);
 
         // Create Save button
 
         var buttonEl = document.createElement("button");
-        buttonEl.setAttribute("type","button");
-        buttonEl.setAttribute("class","btn saveBtn btn-info col-12 col-lg-1 ");
-        buttonEl.setAttribute("id","saveEl");
+        buttonEl.setAttribute("type", "button");
+        buttonEl.setAttribute("class", "btn saveBtn btn-info col-12 col-lg-1 ");
+        buttonEl.setAttribute("id", "saveEl");
 
         // Append above to the row div
 
@@ -59,24 +76,10 @@ function renderSchedule() {
         rowEl.appendChild(formEl);
         rowEl.appendChild(buttonEl);
         console.log(i);
-       
+
         mainEl.appendChild(timeBlock);
-        // var hour = i;
-        // const timeDiv = document.createElement("div");
-        // if (i > 12) {hour = hour - 12;}
-        // timeDiv.textContent = hour;
-        // // Set class based on relation to current time
-        // if (i < thisHour ) {
-        //     timeDiv.setAttribute("class", "row past");
-        // } else if (i == thisHour) {
-        //     timeDiv.setAttribute("class", "row present");
-
-        // } else {
-        //     timeDiv.setAttribute("class", "row future");
-        // }
-        // console.log(timeDiv)
-
     }
+
 }
 
 renderSchedule()
@@ -85,8 +88,8 @@ function saveSchedule(event) {
     // Save the text content to local storage.
     event.preventDefault();
     var scheduleText = $("#scheduleText").val();
-    hourlySchedule = 
-    localStorage.setItem("hourlySchedule", hourlySchedule);
+    hourlySchedule =
+        localStorage.setItem("hourlySchedule", hourlySchedule);
 }
 
 
