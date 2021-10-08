@@ -12,7 +12,7 @@ Daily calendar app that lets you save to-dos every hour 9-5. Hour blocks are col
 
 ## Screenshot of working application
 
-![Screenshot of calendar application.](./screenshot.jpg)
+![Screenshot of calendar application.](./screenshot.png)
 
 ## Criteria for my reference
 
