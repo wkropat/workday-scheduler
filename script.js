@@ -1,40 +1,94 @@
-var container = $("container");
-var timeBlock = $("timeBlock");
-var timeEl = $("#timeEl");
-var taskEl = $("#taskEl");
-var saveEl = $("#saveEl");
-var nineEL = $("#9");
-var tenEL = $("#10");
-var elevenEL = $("#11");
-var twelveEL = $("#12");
-var oneEL = $("#13");
-var twoEL = $("#14");
-var threeEL = $("#15");
-var fourEL = $("#16");
-var fiveEL = $("#17");
+var timeBlock = document.querySelector("timeBlock");
 var thisHour = moment().format("H");
+var mainEl = document.getElementById("mainEl");
+var tasks = [];
 
 function init() {
-    // Build the schedule with any preloaded content
-    if (id < hour ) {
-        $($)
+    // Build the schedule with any preloaded content from local storage
+    var storedTasks = JSON.parse(localStorage.getItem("tasks"));
+    if (storedTasks !== null) {
+        tasks = storedTasks;
     }
-
-    // get from local storage: var count = localStorage.getItem("count");
+    renderSchedule();
 }
 
+
+
+function renderSchedule() {
+
+    // Make scheule blocks 
+    for (var i = 9; i < 18; i++) {      
+        // for each hour in the day make the row structure
+        var timeBlock = document.createElement("div");
+        timeBlock.setAttribute("class", "container-fluid timeBlock");
+        var rowEl = document.createElement("div");
+        rowEl.setAttribute("class", "row");
+        timeBlock.appendChild(rowEl);
+        
+        // Fill out hour on the left
+        var timeEl = document.createElement("div");
+        timeEl.setAttribute("class", "col-12 col-lg-1 bg-secondary rounded p3 text-align:center")
+        var timeElH3 = document.createElement("h3");
+        timeElH3.textContent = i;
+
+        timeEl.appendChild(timeElH3);
+
+        // Create Form Element, background depends on time
+
+        var formEl = document.createElement("form");
+        formEl.setAttribute("class", "col-12 col-lg-10");
+        formEl.setAttribute("id", "taskEl");
+
+        var formInputEl = document.createElement("input");
+        formInputEl.setAttribute("type","text");
+        formInputEl.setAttribute("class","form-control");
+        formInputEl.setAttribute("id","scheduleText");
+        formInputEl.setAttribute("placeholder","What to do...");
+        formEl.appendChild(formInputEl);
+
+        // Create Save button
+
+        var buttonEl = document.createElement("button");
+        buttonEl.setAttribute("type","button");
+        buttonEl.setAttribute("class","btn saveBtn btn-info col-12 col-lg-1 ");
+        buttonEl.setAttribute("id","saveEl");
+
+        // Append above to the row div
+
+        rowEl.appendChild(timeEl);
+        rowEl.appendChild(formEl);
+        rowEl.appendChild(buttonEl);
+        console.log(i);
+       
+        mainEl.appendChild(timeBlock);
+        // var hour = i;
+        // const timeDiv = document.createElement("div");
+        // if (i > 12) {hour = hour - 12;}
+        // timeDiv.textContent = hour;
+        // // Set class based on relation to current time
+        // if (i < thisHour ) {
+        //     timeDiv.setAttribute("class", "row past");
+        // } else if (i == thisHour) {
+        //     timeDiv.setAttribute("class", "row present");
+
+        // } else {
+        //     timeDiv.setAttribute("class", "row future");
+        // }
+        // console.log(timeDiv)
+
+    }
+}
+
+renderSchedule()
+
 function saveSchedule(event) {
-    // Save the text content of the upchild node to local storage.
+    // Save the text content to local storage.
     event.preventDefault();
     var scheduleText = $("#scheduleText").val();
     hourlySchedule = 
     localStorage.setItem("hourlySchedule", hourlySchedule);
 }
 
-function inputText() {
-    // Click within the taskEl and user 
-
-}
 
 // Use moment to get current time in 24 hour format
 // if the timeblock id class (an integer 9-17) is less than the current hour given above
@@ -44,5 +98,7 @@ function inputText() {
 // else timeblock setattribute bg-green btn-success
 
 // Add listener events for button clicks
-saveEl.addEventListener("click", saveSchedule);
+// saveEl.addEventListener("click", saveSchedule);
 // taskEl.addEventListener("click", inputText);
+
+// init()
